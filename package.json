@@ -8,15 +8,23 @@
     "faker": "^4.1.0",
     "lodash": "^4.17.4",
     "source-map-support": "^0.4.15",
+    "trash-cli": "^1.4.0",
     "typescript": "^2.3.2"
   },
   "devDependencies": {
     "@types/express": "^4.0.35",
     "@types/faker": "^4.1.0",
     "@types/lodash": "^4.14.64",
-    "@types/node": "^7.0.18"
+    "@types/node": "^7.0.18",
+    "ava": "^0.19.1",
+    "ts-node": "^3.0.4"
   },
   "scripts": {
-    "build": "tsc -p tsconfig.json"
+    "build": "tsc -p tsconfig.json",
+    "test:clean": "trash tests/**/*.spec.js",
+    "test:build": "npm run test:clean && tsc -p tests/tsconfig.json",
+    "test:build:watch": "npm run test:clean && tsc -p tests/tsconfig.json -w",
+    "test:run": "ava tests/**/*.spec.js -v",
+    "test:run:watch": "ava tests/**/*.spec.js -w -v"
   }
 }
