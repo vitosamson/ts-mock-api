@@ -1,6 +1,6 @@
 import * as ts from 'typescript';
 import { random } from 'lodash';
-import factoryStore, { FactoryMap } from './factoryStore';
+import factoryStore, { FactoryMap } from '../factoryStore';
 import createValueForKind from './createValueForKind';
 
 export interface IFactory {

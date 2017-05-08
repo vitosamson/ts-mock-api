@@ -5,7 +5,7 @@ import { get, random } from 'lodash';
 export default function createValueForKind(kind: ts.SyntaxKind, member: ts.PropertySignature, modifiers: any) {
   switch (kind) {
     case ts.SyntaxKind.StringKeyword: {
-      let generator: (...args: any[]) => any;
+      let generator: (length: number) => string;
       if (modifiers.type && get(faker, modifiers.type)) {
         generator = get(faker, modifiers.type) as typeof generator;
       } else {
@@ -22,6 +22,13 @@ export default function createValueForKind(kind: ts.SyntaxKind, member: ts.Prope
       return generator(length);
     }
 
+    case ts.SyntaxKind.NumberKeyword: {
+      return random(
+        modifiers.min ? parseInt(modifiers.min, 10): 0,
+        modifiers.max ? parseInt(modifiers.max, 10) : 20000
+      );
+    }
+
     case ts.SyntaxKind.LiteralType: {
       const literal = (member.type as ts.LiteralTypeNode).literal as ts.LiteralExpression;
       switch (literal.kind) {
@@ -30,13 +37,6 @@ export default function createValueForKind(kind: ts.SyntaxKind, member: ts.Prope
         default:
           return literal.text;
       }
-    }
-
-    case ts.SyntaxKind.NumberKeyword: {
-      return random(
-        modifiers.min ? parseInt(modifiers.min, 10): 0,
-        modifiers.max ? parseInt(modifiers.max, 10) : 20000
-      );
     }
 
     // case ts.SyntaxKind.InterfaceDeclaration:
