@@ -4,7 +4,7 @@ import parse from '../../../src/parse';
 test('minLength', t => {
   const { foo } = parse(`
     interface Foo {
-      foo: string; // ##minLength: 10
+      foo: string; // @minLength: 10
     }
   `).get('Foo').factory();
 
@@ -14,7 +14,7 @@ test('minLength', t => {
 test('maxLength', t => {
   const { foo } = parse(`
     interface Foo {
-      foo: string; // ##maxLength: 100
+      foo: string; // @maxLength: 100
     }
   `).get('Foo').factory();
 
@@ -24,7 +24,7 @@ test('maxLength', t => {
 test('length', t => {
   const { foo } = parse(`
     interface Foo {
-      foo: string; // ##length: 18
+      foo: string; // @length: 18
     }
   `).get('Foo').factory();
 
@@ -34,7 +34,7 @@ test('length', t => {
 test('minLength and maxLength', t => {
   const { foo } = parse(`
     interface Foo {
-      foo: string; // ##minLength: 20, maxLength: 120
+      foo: string; // @minLength: 20, maxLength: 120
     }
   `).get('Foo').factory();
 

@@ -1,5 +1,5 @@
 import * as ts from 'typescript';
-import createObjectFactory from './createObjectFactory';
+import createObjectFactory, { parseInterfaceComments } from './createObjectFactory';
 import factories from '../factoryStore';
 
 export default function parse(code: string) {
@@ -8,7 +8,9 @@ export default function parse(code: string) {
     if (node.kind === ts.SyntaxKind.InterfaceDeclaration) {
       const interfaceDeclaration = node as ts.InterfaceDeclaration;
       const isExported = !!interfaceDeclaration.modifiers && interfaceDeclaration.modifiers.some(m => m.kind === ts.SyntaxKind.ExportKeyword);
-      const { route, factory } = createObjectFactory(interfaceDeclaration);
+      const modifiers = parseInterfaceComments(interfaceDeclaration);
+      const factory = createObjectFactory(interfaceDeclaration);
+      const route = modifiers.resource || (interfaceDeclaration.name as ts.Identifier).text;
       factories.set(route, { factory, isExported });
     }
   });

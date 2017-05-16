@@ -15,7 +15,7 @@
 //   name: string; // type: business.companyName
 // }
 
-// ##resource: /users
+// @resource: /users
 export interface User {
   foo: {
     bar: string;

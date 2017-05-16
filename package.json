@@ -31,7 +31,6 @@
   },
   "ava": {
     "files": ["tests/**/*.spec.js"],
-    "verbose": true,
-    "require": ["source-map-support"]
+    "require": ["./tests/setup.js"]
   }
 }

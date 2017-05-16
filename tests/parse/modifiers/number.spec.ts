@@ -4,7 +4,7 @@ import parse from '../../../src/parse';
 test('min', t => {
   const { foo } = parse(`
     interface Foo {
-      foo: number; // ##min: 42
+      foo: number; // @min: 42
     }
   `).get('Foo').factory();
   t.true(foo >= 42);
@@ -13,7 +13,7 @@ test('min', t => {
 test('max', t => {
   const { foo } = parse(`
     interface Foo {
-      foo: number; // ##max: 122
+      foo: number; // @max: 122
     }
   `).get('Foo').factory();
   t.true(foo <= 122);
@@ -22,7 +22,7 @@ test('max', t => {
 test('min and max', t => {
   const { foo } = parse(`
     interface Foo {
-      foo: number; // ##min: 10, max: 100
+      foo: number; // @min: 10, max: 100
     }
   `).get('Foo').factory();
   t.true(foo >= 10);
